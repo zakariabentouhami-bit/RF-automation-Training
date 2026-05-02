@@ -7,3 +7,4 @@ HEAD
 autre modif master
 Version feature
 feature/conflict-test2
+## Modifié directement sur GitHub
