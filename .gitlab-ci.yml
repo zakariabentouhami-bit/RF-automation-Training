@@ -7,7 +7,11 @@ robot_tests:
   before_script:
     - pip install robotframework
   script:
-    - echo "Pipeline GitLab CI operationnel"
-    - python -m robot --version || true
+    - robot --outputdir results tests/ci_test.robot
+  artifacts:
+    when: always
+    paths:
+      - results/
+    expire_in: 7 days
   only:
     - master
