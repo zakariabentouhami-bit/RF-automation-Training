@@ -1,0 +1,32 @@
+name: Robot Framework Tests
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  robot_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Robot Framework
+        run: pip install robotframework
+
+      - name: Run Robot Framework tests
+        run: robot --outputdir results tests/ci_test.robot
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: robot-results
+          path: results/
